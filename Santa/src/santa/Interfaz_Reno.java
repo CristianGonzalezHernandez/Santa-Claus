@@ -1,4 +1,4 @@
-package renos;
+package santa;
 
 
 public class Interfaz_Reno extends javax.swing.JFrame {
