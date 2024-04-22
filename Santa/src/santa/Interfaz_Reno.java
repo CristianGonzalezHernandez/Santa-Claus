@@ -1,8 +1,9 @@
 package santa;
-
+import santa.Interfaz;
 
 public class Interfaz_Reno extends javax.swing.JFrame {
 
+   public Interfaz principal;
     /**
      * Creates new form Interfaz_Reno
      */
@@ -14,6 +15,15 @@ public class Interfaz_Reno extends javax.swing.JFrame {
     
     public void inc_renos(){
         cont++;
+        this.principal.sumarRenos();
+    }
+    
+    public void resetRenos(){
+        cont =0;
+        jLabel3.setText("Número actual de renos: 0");
+    }
+    public void setPrincipal(Interfaz NewPrincipal){
+        this.principal = NewPrincipal;
     }
     
     @SuppressWarnings("unchecked")

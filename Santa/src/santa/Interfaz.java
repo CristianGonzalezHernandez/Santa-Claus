@@ -11,25 +11,47 @@ import javax.swing.ImageIcon;
  * @author guija
  */
 import java.awt.Graphics;
+import java.awt.Image;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import santa.Interfaz_Duende;
+import santa.Interfaz_Reno;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.*;
 public class Interfaz extends javax.swing.JFrame {
 
+    public Interfaz_Duende InterfazDuende = new Interfaz_Duende();
+    public Interfaz_Reno InterfazReno = new Interfaz_Reno();
+    private Timer time = new Timer();
+    
     private int renos;
     private int duendes;
+    
+      ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     /**
      * Creates new form Interfaz
      */
     public Interfaz() throws InterruptedException {
         initComponents();
-        
+        InterfazReno.setVisible(true);
+        InterfazDuende.setVisible(true);
+        InterfazReno.setPrincipal(this);
+        InterfazDuende.setPrincipal(this);
         //Ayudar();
+        
+        
     }
 
     public void Ayudar(){
-        SantaMimido.setIcon(new ImageIcon("src/imagenes/SantaAyudando.jpg")); 
+        ImageIcon imageicon = new ImageIcon("src/imagenes/SantaAyudando.jfif");
+        Image image = imageicon.getImage();
+        Image newImage = image.getScaledInstance(650, 500, 500);
+        SantaMimido.setIcon(new ImageIcon(newImage)); 
+//        SantaMimido.setIcon(new ImageIcon("src/imagenes/SantaAyudando.jfif")); 
+        //SantaMimido.
     }
     
     public void Repartir(){
@@ -39,23 +61,59 @@ public class Interfaz extends javax.swing.JFrame {
     public void Dormir(){
        SantaMimido.setIcon(new ImageIcon("src/imagenes/Santa.jpg")); 
     }
-    
+   
     
     public void sumarRenos(){
         this.renos++;
+        if(this.renos >= 8){
+            this.InterfazReno.resetRenos();
+//            try {
+                renos =0;
+                Runnable task = new Runnable() {
+            public void run() {
+                // Aquí va el código de la acción que quieres realizar
+                Repartir();
+            }
+        };
+        
+        ScheduledFuture<?> future = executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
+        executor.schedule(new Runnable() {
+            public void run() {
+                Dormir();
+                future.cancel(true);
+            }
+        }, 5, TimeUnit.SECONDS);
+//            } 
+//            catch (InterruptedException ex) {
+//                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        }
     }
     
     public void sumarDuendes(){
         this.duendes ++;
         if(this.duendes >= 3){
-            try {
-                Ayudar();
-                Thread.sleep(5000);
-                Dormir();
+            this.InterfazDuende.resetDuendes();
+//            try {
                 duendes =0;
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                Runnable task = new Runnable() {
+            public void run() {
+                // Aquí va el código de la acción que quieres realizar
+                Ayudar();
             }
+        };
+        
+        ScheduledFuture<?> future = executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
+        executor.schedule(new Runnable() {
+            public void run() {
+                Dormir();
+                future.cancel(true);
+            }
+        }, 5, TimeUnit.SECONDS);
+//            } 
+//            catch (InterruptedException ex) {
+//                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
     }
     

@@ -1,8 +1,10 @@
 package santa;
 
+import santa.Interfaz;
 
 public class Interfaz_Duende extends javax.swing.JFrame {
 
+    public Interfaz principal;
     /**
      * Creates new form Interfaz_Reno
      */
@@ -13,9 +15,20 @@ public class Interfaz_Duende extends javax.swing.JFrame {
 
     int cont = 0;
     
-    public void contar_duendes(){
+    public void inc_duendes(){
         cont++;
+        this.principal.sumarDuendes();
     }
+    
+    public void resetDuendes(){
+        cont = 0;
+        jLabel3.setText("Número actual de duendes: 0");
+    }
+    
+    public void setPrincipal(Interfaz newPrincipal){
+        this.principal = newPrincipal;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,7 +40,6 @@ public class Interfaz_Duende extends javax.swing.JFrame {
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setBackground(new java.awt.Color(0, 102, 255));
@@ -79,7 +91,7 @@ public class Interfaz_Duende extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        contar_duendes();
+        inc_duendes();
         jLabel3.setText("Número actual de duendes: " + String.valueOf(cont));
     }//GEN-LAST:event_jButton1ActionPerformed
 
