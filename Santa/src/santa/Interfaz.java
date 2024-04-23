@@ -1,15 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Autores 
+    Emmanuel Gómez Trujillo
+    Cristian González Hernández
+    Aníbal Uriel Guijarro Rocha
+    Mario Alessandro López García
+    Martín Raygoza De León
+    Alejandro Becerra Ramirez 
  */
 package santa;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author guija
- */
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -32,7 +33,7 @@ public class Interfaz extends javax.swing.JFrame {
     
       ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     /**
-     * Creates new form Interfaz
+     * Creación de una nueva interfaz 
      */
     public Interfaz() throws InterruptedException {
         initComponents();
@@ -45,6 +46,9 @@ public class Interfaz extends javax.swing.JFrame {
         
     }
 
+    /*
+    Método para ayudar a los duendes a hacer los regalos 
+    */
     public void Ayudar(){
         ImageIcon imageicon = new ImageIcon("src/imagenes/SantaAyudando.jfif");
         Image image = imageicon.getImage();
@@ -54,15 +58,24 @@ public class Interfaz extends javax.swing.JFrame {
         //SantaMimido.
     }
     
+    /*
+    Método para repartir los regalos 
+    */
     public void Repartir(){
        SantaMimido.setIcon(new ImageIcon("src/imagenes/SantaRepartiendo.jpg")); 
     }
     
+    /*
+    Método para mandar a dormir a Santa 
+    */
     public void Dormir(){
        SantaMimido.setIcon(new ImageIcon("src/imagenes/Santa.jpg")); 
     }
    
     
+    /*
+    Método para hacer el conteo de los renos 
+    */
     public void sumarRenos(){
         this.renos++;
         if(this.renos >= 8){
@@ -90,6 +103,9 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Método para hacer el conteo de los duendes 
+    */
     public void sumarDuendes(){
         this.duendes ++;
         if(this.duendes >= 3){

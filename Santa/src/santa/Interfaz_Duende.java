@@ -1,3 +1,13 @@
+/*
+    Autores 
+    Emmanuel Gómez Trujillo
+    Cristian González Hernández
+    Aníbal Uriel Guijarro Rocha
+    Mario Alessandro López García
+    Martín Raygoza De León
+    Alejandro Becerra Ramirez 
+*/
+
 package santa;
 
 import santa.Interfaz;
